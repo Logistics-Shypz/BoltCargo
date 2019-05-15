@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><!--href="{{url_for('static',filename='css/bootstrap.min.css')}}"-->
+	<title>Boltcargo Admin Panel</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+    <script type="text/javascript" src="{{url_for('static',filename='js/jquery-3.3.1.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
+
+</head>
+<style type="text/css">
+	
+
+
+body {
+  background: #0099cc;
+}
+form {
+  width: 60%;
+  margin: 60px auto;
+  background: #efefef;
+  padding: 60px 120px 80px 120px;
+  text-align: center;
+  -webkit-box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+  box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+}
+label {
+  display: block;
+  position: relative;
+  margin: 40px 0px;
+}
+.label-txt {
+  position: absolute;
+  top: -1.6em;
+  padding: 10px;
+  font-family: sans-serif;
+  font-size: .8em;
+  letter-spacing: 1px;
+  color: rgb(120,120,120);
+  transition: ease .3s;
+}
+.input {
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.line-box {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  background: #0099cc;
+}
+
+.line {
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0099cc;
+  transition: ease .6s;
+}
+
+.input:focus + .line-box .line {
+  width: 100%;
+}
+
+.label-active {
+  top: -3em;
+}
+
+button {
+  display: inline-block;
+  padding: 12px 24px;
+  background: #0099cc;
+  font-weight: bold;
+  color: #ffffff;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: ease .3s;
+}
+
+button:hover {
+  background: #0099cc;
+  color: #ffffff;
+}
+
+</style>
+<body>
+
+
+	<!--
+		class container : fixed width container
+		class container-fluid: full width container
+
+	-->
+
+	<div style="display: inline-block;margin: 10px;">
+
+		<img src="{{url_for('static',filename='assets/brand_image.png')}}" alt="Boltcargo" height="142" width="142">
+
+	</div>
+
+	<form>
+		  <label>
+		  	<p id="e" hidden class="errormessage">UserType required</p>
+		    <p class="label-txt">UserType *</p>
+		    <br/>
+		    <!--<input id="uname" name="uname" type="text" class="input">-->
+		    <select id="uType" class="input">
+			  <option value="forwarder">Forwarder</option>
+			  <option value="shipper">Shipper</option>
+			  <option value="transporter">Transporter</option>
+			</select>
+		    <div class="line-box">
+		      <div class="line"></div>
+		    </div>
+		  </label>
+		  <label>
+		  	<p hidden class="errormessage">Business Name required</p>
+		    <p class="label-txt">Business Name *</p>
+		    <input id="bname" name="bname" type="text" class="input">
+		    <div class="line-box">
+		      <div class="line"></div>
+		    </div>
+		  </label>
+
+		  <label>
+		  	<p hidden class="errormessage">Business Address required</p>
+		    <p class="label-txt">Business Address *</p>
+		    <input id="baddress" name="baddress" type="text" class="input">
+		    <p class="errormessage"></p>
+		    <div class="line-box">
+		      <div class="line"></div>
+		    </div>
+		  </label>
+		  <label>
+		  	<p hidden class="errormessage">Business Contact required</p>
+		    <p class="label-txt">Business Contact *</p>
+		    <input id="bcontact" name="bcontact" type="text" class="input">
+		    <p class="errormessage"></p>
+		    <div class="line-box">
+		      <div class="line"></div>
+		    </div>
+		  </label>
+		  <label>
+		  	<p hidden class="errormessage">Business Email required</p>
+		    <p class="label-txt">Business Email *</p>
+		    <input id="bemail" name="bemail" type="text" class="input">
+		    <p class="errormessage"></p>
+		    <div class="line-box">
+		      <div class="line"></div>
+		    </div>
+		  </label>
+		  <!--<label>
+		  	<p hidden class="errormessage">Mobile number required</p>
+		    <p class="label-txt">Business Kyc *</p>
+		    <input id="umobile" name="umobile" type="text" class="input">
+		    <p class="errormessage"></p>
+		    <div class="line-box">
+		      <div class="line"></div>
+		    </div>
+		  </label>
+		  <label>
+		  	<p hidden class="errormessage">Mobile number required</p>
+		    <p class="label-txt">Business Kyc Documents *</p>
+		    <input id="umobile" name="umobile" type="text" class="input">
+		    <p class="errormessage"></p>
+		    <div class="line-box">
+		      <div class="line"></div>
+		    </div>
+		  </label>-->
+
+		  <button id="proBtn" type="button">submit</button>
+
+		  
+	</form>
+
+
+ <script type="text/javascript">
+
+	$(document).ready(function(){
+
+			var backend_server_ip = '{{backend_server_ip}}';
+			var flask_server_ip = '{{flask_server_ip}}';
+
+			console.log(backend_server_ip);
+			console.log(flask_server_ip);
+
+		
+
+			$('.input').focus(function(){
+				$(this).val('')
+			    $(this).parent().find(".label-txt").addClass('label-active');
+			  });
+
+			  $(".input").focusout(function(){
+			    if ($(this).val() == '') {
+			      $(this).parent().find(".label-txt").removeClass('label-active');
+			    };
+			  });
+
+			  var myRedirect = function(redirectUrl, arg, value) {
+				  var form = $('<form action="' + redirectUrl + '" method="post">' +
+				  '<input type="hidden" name="'+ arg +'" value="' + value + '"></input>' + '</form>');
+				  $('body').append(form);
+				  $(form).submit();
+				};
+
+
+			  $('#proBtn').on('click',function(){
+
+
+
+			  		var d = {
+
+					  	userType : $('#uType option:selected').val(),
+					  	userBusinessName: $('#bname').val(), 
+					  	userBusinessAddress: $('#baddress').val(),
+					  	userBusinessContact: $('#bcontact').val(),
+					  	userBusinessEmail: $('#bemail').val(),
+
+					  }
+
+					 sessionStorage.userType = $('#uType option:selected').val()
+
+			  		$.ajax({
+
+						type: "PUT",
+						url: "http://" + backend_server_ip + ":3000/v1/users/user/" + sessionStorage.id,
+						data: d,
+						success: function(data){
+							console.log(data); 
+							//$.redirect('/transport',{'userid':sessionStorage.id})
+							if(sessionStorage.userType == 'transporter'){
+								myRedirect("/transporter", "userid", sessionStorage.id);
+								console.log("done")
+							}else if(sessionStorage.userType == 'forwarder'){
+								myRedirect("/forwarder", "userid", sessionStorage.id);
+								console.log("done")
+							}
+							
+							//window.location.href = "http://localhost:5000/transporter?userid=" + sessionStorage.id
+							// if(data['status'] == 200){
+
+
+
+							// 	if(typeof(Storage) !== "undefined"){
+							// 		sessionStorage.id = data['object_id']
+							// 	}
+							// 	window.location.href = "http://localhost:5000/profile";
+							// }else if(data['status'] == 401){
+							// 	window.location.href = "http://localhost:5000/register?signup=" + data['description']
+								
+							// }
+							
+
+						},
+
+						dataType: "json"
+					})
+
+			  })
+			  
+			 
+
+	});
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Boltcargo Admin Panel</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">
+    <script type="text/javascript" src="{{url_for('static',filename='js/jquery-3.3.1.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
+   <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.7.0/css/all.css' integrity='sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ' crossorigin='anonymous'>
+    <style type="text/css">
+    	
+    	#linkC{
+
+    		/*border: 1px solid red;*/
+    		display: inline-block;
+    		width: 20%;
+    		float: left;
+
+    	}
+
+    	#mainC{
+
+    		/*border: 1px solid blue;*/
+    		display: inline-block;
+    		width: 80%;
+    		height: auto;
+    		overflow: hidden;
+    		padding: 20px;
+
+    	}
+
+    	.card-link{
+    		color: #7423E8;
+    	}
+
+    	.nav-link{
+
+    		color: #7423E8;
+    	}
+
+    	input{
+    		margin: 0;
+    	}
+
+
+
+    </style>
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-sm bg-light navbar-light fixed-top">
+
+		<!-- Brand/logo -->
+  		<a class="navbar-brand" href="#">
+  			
+  			<img src="{{url_for('static',filename='assets/brand_image.png')}}" class="rounded-oval" width="50" height="50">
+  		</a>
+
+  		<!-- Toggler/collapsibe Button -->
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+
+	  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+		  <!-- Links -->
+		  <ul class="navbar-nav ">
+		    <li class="nav-item">
+		      <a class="nav-link" href="#">Home</a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link" href="#">About Us</a>
+		    </li>
+		    <li class="nav-item">
+		      <a class="nav-link" href="#">Contact Us</a>
+		    </li>
+		  </ul>
+		</div>
+
+	</nav>
+
+	<div style="margin-top:80px">
+		<div id="linkC" class="container"> 
+			<div id="nav" class="list-group list-group-flush">
+			  <a href="#exportOrder" class="list-group-item list-group-item-action" >Export Order</a>
+			  <a href="#importOrder" class="list-group-item list-group-item-action">Import Order</a>
+			  <a href="#addForwarder" class="list-group-item list-group-item-action">Manage Forwarder</a>
+			  <a href="#addShipper" class="list-group-item list-group-item-action">Manage Shipper</a>
+			</div>
+			
+		</div>
+
+		<div id="mainC" class="container">
+				
+				<div id="exportOrder" class="toggle">
+						
+					<div class="container">
+
+						<h2>Export Order Workflow</h2>
+						<hr>
+						<br>
+
+						<div id="accordion">
+							    <div class="card">
+							      <div class="card-header">
+							        <a class="card-link" data-toggle="collapse" href="#collapseOne">
+							          Shipping Details
+							        </a>
+							      </div>
+							      <div id="collapseOne" class="collapse show" data-parent="#accordion">
+							        <div class="card-body">
+							         <form class="form-horizontal">
+							          	<div class="row">
+							          		<div class="col">
+							          			<div class="form-group">
+						                          <label for="FF">Forwarder</label>
+						                          <select class="form-control-lg" id="FF">
+						                            <option>Damco</option>
+						                       
+						                          </select>
+						                        </div>
+							          		</div>
+							          		<div class="col">
+							          			<div  class="form-group">
+						                          <label for="Shipper">Shipper</label>
+						                          <select class="form-control-lg" id="Shipper">
+						                            <option>TETRA PAK INDIA PVT. LTD.</option>
+						                       
+						                          </select>
+						                        </div>
+							          		</div>
+							          		<div class="col">
+							          			<div  class="form-group">
+						                          <label for="ShippingLine">Line</label>
+						                          <select class="form-control-lg" id="ShippingLine">
+						                            <option>Maersk</option>
+						                       
+						                          </select>
+						                        </div>
+
+							          		</div>
+							          	</div>
+							          	<div class="row">
+							          		<div class="col">
+							          			<label for="BookingNo">Booking Number</label>
+							          			<input type="text" class="form-control-plaintext" id="BookingNo">
+						                        
+							          		</div>
+							          		<div class="col">
+							          			<label for="MovementType">Movement Type</label>
+						                          <select class="form-control-lg" id="MovementType">
+						                            <option>Empty Load</option>
+						                       
+						                          </select>
+							          		</div>
+							          		<div class="col">
+							          			<label for="DispatchDate">Dispatch Date</label>
+							          			<input type="text" class="form-control-plaintext" id="DispatchDate">
+
+							          		</div>
+
+							          	</div>
+
+							          	<div class="row">
+							          		<div class="col">
+							          			<label for="FromPickupLocation">From Location</label>
+							          			<input type="text" class="form-control-plaintext" id="FromPickupLocation">
+							          		</div>
+							          		<div class="col">
+							          			<label for="ToPickupLocation">Pickup Yard</label>
+							          			<input type="text" class="form-control-plaintext" id="ToPickupLocation">
+							          		</div>
+							          		<div class="col">
+							          			<label for="ToEndLocation">End Location</label>
+							          			<input type="text" class="form-control-plaintext" id="ToEndLocation">
+							          		</div>
+							          	</div>
+
+							          	<div class="row">
+							          		<div class="col">
+							          			<label for="PickupDate">Pickup Date</label>
+							          			<input type="text" class="form-control-plaintext" id="PickupDate">
+							          		</div>
+							          		<div class="col">
+							          			<label for="StuffingLocation">Stuffing Location</label>
+							          			<input type="text" class="form-control-plaintext" id="StuffingLocation">
+							          		</div>
+							          		<div class="col">
+							          			<label for="StuffingLocationAddress">Stuffing Location Address</label>
+							          			<input type="text" class="form-control-plaintext" id="StuffingLocationAddress">
+							          		</div>
+							          	</div>
+
+
+							          	<div class="row">
+							          		<div class="col">
+							          			<label for="ReturnDate">Return Date</label>
+							          			<input type="text" class="form-control-plaintext" id="ReturnDate">
+							          		</div>
+							          		<div class="col">
+							          			<p>Special Cargo Information</p>
+							          			<div class="form-check-inline">
+											      <label class="form-check-label" for="check1">
+											        <input type="checkbox" class="form-check-input" id="check1" name="item1" value="Shipper own container">Shipper's own container
+											      </label>
+											    </div>
+											    <div class="form-check-inline">
+											      <label class="form-check-label" for="check2">
+											        <input type="checkbox" class="form-check-input" id="check2" name="item2" value="Dangerous">Dangerous
+											      </label>
+											    </div>
+    
+							          		</div>
+
+							          	</div>
+
+							          </form>
+							        </div>
+							      </div>
+							    </div>
+							    <div class="card">
+							      <div class="card-header">
+							        <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+							        Container Details
+							      </a>
+							      </div>
+							      <div id="collapseTwo" class="collapse" data-parent="#accordion">
+							        <div class="card-body">
+							          <div class="row">
+							          	<div class="col">
+							          		<label for="nc">Number of Containers</label>
+  											<input type="text" id="nc">
+							          	</div>
+							          	<div class="col">
+							          		<div style="margin-top: 40px;">
+							          			<button id="addContainers" style='font-size:24px'><i class='fas fa-plus'></i></button>
+							          		</div>
+							          	</div>
+							          </div>
+							        </div>
+
+
+							      </div>
+
+
+							    </div>
+							    <div class="card">
+							      <div class="card-header">
+							        <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
+							          Invoice Details
+							        </a>
+							      </div>
+							      <div id="collapseThree" class="collapse" data-parent="#accordion">
+							        <div class="card-body">
+							          Contains form for invoice details
+							        </div>
+							      </div>
+							    </div>
+							  </div>
+
+					</div>
+
+				</div> 
+				<div id="importOrder" class="toggle" style="display:none">Import workflow</div>
+				<div id="addForwarder" class="toggle" style="display:none">Managing Forwarder</div>
+				<div id="addShipper" class="toggle" style="display:none">Managing Shipper</div>
+		</div>
+
+
+		
+		
+
+	</div>
+
+	
+
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			var s = `
+
+				<div id="'+i+'" class="row">
+					<div class="col">
+						<label for="ConSize">Container Size</label>
+	                      <select class="form-control-lg" id="ConSize">
+	                        <option>20</option>
+	                        <option>40</option>
+	                        <option>40HC</option>
+	                   
+	                      </select>
+					</div>
+					<div class="col">
+						<label for="ConType">Container Type</label>
+	                      <select class="form-control-lg" id="ConType">
+	                        <option>GP</option>
+	                        <option>FR</option>
+	                        <option>OT</option>
+	                   		<option>HC</option>
+	                      </select>
+					</div>
+					<div class="col">
+						<label for="ConWeight">Container Wt</label>
+	                      <select class="form-control-lg" id="ConWeight">
+	                        <option>0-8</option>
+	                        <option>8.1-18</option>
+	                        <option>18.1-26</option>
+	                   		<option>0-18</option>
+	                   		<option>18-26</option>
+	                      </select>
+					</div>
+					<div class="col">
+						<label for="VehicleNumber">Vehicle Number</label>
+						<input type="text" id="VehicleNumber">
+					</div>
+					<div class="col">
+						<label for="LRNumber">LR Number</label>
+						<input type="text" id="LRNumber">
+					</div>
+					<div class="col">
+						<label for="DriverNumber">Driver Number</label>
+						<input type="text" id="DriverNumber">
+					</div>
+					<div class="col">
+						<label for="VehicleRate">VehicleRate</label>
+						<input type="text" id="VehicleRate">
+					</div>
+				</div>
+
+
+
+
+			`
+
+
+			$("#nav a").click(function(e){
+			    e.preventDefault();
+			    $(".toggle").hide();
+			    var toShow = $(this).attr('href');
+			    $(toShow).show();
+			});
+
+
+			$("#addContainers").click(function(){
+
+				num_of_containers = $('#nc').val()
+
+				for(i=0;i<num_of_containers;i++){
+					$('#collapseTwo .card-body').append(s);
+				}
+
+				
+
+			});
+
+
+
+
+
+
+		});
+
+	</script>
+	
+
+</body>
+</html>

@@ -1,0 +1,298 @@
+{% include "header.html" %}
+{% block body %}
+<style type="text/css">
+
+
+	.c {
+
+		text-align: left;
+		color: #000000;
+
+	}
+
+	input[type=checkbox]{
+		
+  		margin-top: 20px;
+		padding: 30px;
+  		background: transparent;
+
+	}
+
+</style>
+
+
+<div id="navDiv" class="container-fluid">
+
+	<div class="row">
+		<div class="col" style="text-align: left;margin-left: 20px;">
+			<a class="navbar-brand" href="#">
+  			
+  				<img src="{{url_for('static',filename='assets/brand_image.png')}}" class="rounded-oval" width="100" height="100">
+  			</a>
+		</div><!-- col1 div-->
+
+		<div class="col" style="text-align: right;">
+			<div id="uDiv">
+				Hi {{username}}
+
+				<div id="pDiv" style="display:none">
+					<ul class="list-group">
+						<li class="list-group-item"><a href="/logout">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+			
+			
+
+		</div><!-- col2 div-->
+		
+	</div><!-- row div -->
+	
+
+</div><!--  Nav div-->
+
+
+<div style="margin-top:80px">
+
+
+	<div id="linkC" class="container"> 
+		<div id="nav" class="list-group list-group-flush">
+		  <a href="#createEnquiry" class="list-group-item list-group-item-action">Create Enquiry</a>
+		</div>
+		
+	</div><!-- linkC div-->
+
+	<div id="mainC" class="container">
+
+		<div id="createEnquiry" class="toggle">
+
+			<h1>Create Enquiry</h1>
+			<br/>
+			<p id="addEnquiryResult"></p>
+
+			<div id="jobDiv">
+				<form style="padding: 50px;">
+					
+				   <label>
+				    <p class="label-txt">Type of Enquiry *</p>
+				    <br/>
+				   	<select id="tEnquiry" class="input">
+					  <option value="spot">spot</option>
+					  <option value="contract">contract</option>
+					</select>
+				    <div class="line-box">
+				      <div class="line"></div>
+				    </div>
+				  </label>
+
+				  <label>
+				    <p class="label-txt">Container Type *</p>
+				    <br/>
+				   	<select id="cType" class="input">
+					  <option value="dry">Dry</option>
+					  <option value="reefer">Reefer</option>
+					  <option value="odc">ODC</option>
+					  <option value="domestic">Domestic</option>
+					</select>
+				    <div class="line-box">
+				      <div class="line"></div>
+				    </div>
+				  </label>
+					
+				  <label>
+				    <p class="label-txt">Party Name *</p>
+				    <br>
+				   	<input type="text" name="partyName" id="pname" class="input">
+				    <div class="line-box">
+				      <div class="line"></div>
+				    </div>
+				  </label>
+
+				  <label>
+				    <p class="label-txt">Stuffing Factory Location *</p>
+				    <br>
+				   	<input type="text" name="factoryLocation" id="flocation" class="input">
+				    <div class="line-box">
+				      <div class="line"></div>
+				    </div>
+				  </label>
+
+				  <label>
+				    <p class="label-txt">Pickup Date *</p>
+				    <br>
+				   	<input type="text" name="pickupDate" id="pdate" class="input">
+				    <div class="line-box">
+				      <div class="line"></div>
+				    </div>
+				  </label>
+
+				
+				  <label>
+				    <p class="label-txt">Stuffing Date *</p>
+				    <br>
+				   	<input type="text" name="stuffingDate" id="sdate" class="input">
+				    <div class="line-box">
+				      <div class="line"></div>
+				    </div>
+				  </label>
+
+				  <label>
+				    <p class="label-txt">Number Of Containers *</p>
+				    <br>
+				   	<input type="text" name="numContainers" id="nCon" class="input">
+				    <div class="line-box">
+				      <div class="line"></div>
+				    </div>
+				  </label>
+
+				  <label>
+				    <p class="label-txt">Type Of Containers *</p>
+				    <br>
+				    <div  class="row">
+				    	<div class="col c">
+				    		<input type="checkbox" name="20" value="20">&nbsp;20
+				    	</div>
+				    	<div class="col">
+				    		<input type="text" id="qty20" name="qty20" class="input">
+				    		<div class="line-box">
+						      <div class="line"></div>
+						    </div>
+				    	</div>
+				    </div>
+				    <div  class="row">
+				    	<div class="col c">
+				    		<input type="checkbox" name="40" value="40">&nbsp;40
+				    	</div>
+				    	<div class="col">
+				    		<input type="text" id="qty40" name="qty40" class="input">
+				    		<div class="line-box">
+						      <div class="line"></div>
+						    </div>
+				    	</div>
+				    </div>
+				   <!-- 	<input type="checkbox" name="20" value="20" class="input"><p style="border: 1px solid red;">20</p> &nbsp; <input type="text" name="qty20" id="qty20" class="input">
+				    <div class="line-box">
+				      <div class="line"></div>
+				    </div> -->
+				  </label>
+
+
+					<!-- Type Of Containers:<br/>
+					<input type="checkbox" name="20" value="20" class="input">20 &nbsp; <input type="text" name="qty20" id="qty20" class="input">
+					<br/>
+					<input type="checkbox" name="40" value="40">40 &nbsp; <input type="text" name="qty40" id="qty40">
+					<br/>
+					<br/>
+
+					<input id="btn1" type="button" value="Submit"> -->
+
+					<button id="jobBtn" type="button">submit</button>
+
+
+				</form>
+			</div>
+
+		</div>
+		
+	</div>
+
+</div><!-- Outer div -->
+
+<script type="text/javascript">
+
+	$(document).ready(function(){
+
+		var backend_server_ip = '{{backend_server_ip}}';
+		var flask_server_ip = '{{flask_server_ip}}';
+
+		$("#nav a").click(function(e){
+			    e.preventDefault();
+			    $(".toggle").hide();
+			    var toShow = $(this).attr('href');
+			    $(toShow).show();
+			});
+
+		$("#uDiv").hover(function(){
+
+			$("#pDiv").show()
+
+		},function(){
+			$("#pDiv").hide()
+
+		})
+
+
+		$('#jobBtn').on('click',function(){
+
+
+
+
+			var favorite = [];
+            $.each($("input[type='checkbox']:checked"), function(){            
+                favorite.push($(this).val());
+            });
+
+            var d = {}
+            for(var i=0;i<favorite.length;i++){
+            	if(favorite[i] == '20'){
+            		d[favorite[i]] = $('#qty20').val()
+            	}else if(favorite[i] == '40'){
+            		d[favorite[i]] = $('#qty40').val()
+            	}
+            	
+
+            }
+
+
+			var enquiry = {
+
+				jobEnquiryType : $("#tEnquiry option:selected").val(),
+				jobContainerType: $("#cType option:selected").val(),
+				jobPartyName: $('#pname').val(),
+				jobStuffingFactoryLocation: $('#flocation').val(),
+				jobPickupDate: $('#pdate').val(),
+				jobStuffingDate : $('#sdate').val(),
+				jobNumberOfContainers: $('#nCon').val(),
+				jobTypeOfContainers : [
+					JSON.stringify(d)
+				]
+
+
+			}
+
+			console.log(enquiry)
+
+			$.ajax({
+
+						type: "POST",
+						url: "http://" + backend_server_ip + ":3000/v1/jobs/job/add",
+						data: enquiry,
+						success: function(data){
+							console.log(data); 
+							if(data['status'] == 200){
+
+								$('#addEnquiryResult').html(data['description'])
+
+							}else if(data['status'] == 401){
+
+								$('#addEnquiryResult').html(data['description'])
+
+								
+							}
+							
+
+						},
+
+						dataType: "json"
+					})
+		})
+
+
+	})
+
+</script>
+	
+
+{% endblock %}
+
+{% include "footer.html" %}

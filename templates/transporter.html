@@ -1,0 +1,667 @@
+{% include "header.html" %}
+{% block body %}
+
+<!--
+
+<div id="navDiv" class="container-fluid">
+
+	<div class="row">
+		<div class="col" style="text-align: left;margin-left: 20px;">
+			<a class="navbar-brand" href="#">
+  			
+  				<img src="{{url_for('static',filename='assets/brand_image.png')}}" class="rounded-oval" width="100" height="100">
+  			</a>
+		</div>
+
+		<div class="col" style="text-align: right;">
+			<div id="uDiv">
+				Hi {{username}}
+
+				<div id="pDiv" style="display:none">
+					<ul class="list-group">
+						<li class="list-group-item"><a href="/logout">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+			
+			
+
+		</div>
+		
+	</div>
+	
+
+	<div style="margin-top:80px">
+		<div id="linkC" class="container"> 
+			<div id="nav" class="list-group list-group-flush">
+			  <a href="#manageVendors" class="list-group-item list-group-item-action">Manage Vendors</a>
+			  <a href="#manageProducts" class="list-group-item list-group-item-action">Manage Products</a>
+			  <a href="#manageEnquiries" class="list-group-item list-group-item-action">Manage Enquiries</a>
+			</div>
+			
+		</div>
+
+		<div id="mainC" class="container">
+			
+
+				<div id="manageVendors" class="toggle">
+					<h1>Manage Vendors</h1>
+					<br/>
+					<br/>
+					<br/>
+
+					<div class="tabs">
+					  <div class="tab-button-outer">
+					    <ul id="tab-button">
+					      <li><a href="#tab01">Add Vendor</a></li>
+					      <li><a id="lv" href="#tab02">List Vendors</a></li>
+					    </ul>
+					  </div>
+					  <div class="tab-select-outer">
+					    <select id="tab-select">
+					      <option value="#tab01">Add Vendor</option>
+					      <option value="#tab02">List Vendors</option>
+					    </select>
+					  </div>
+
+					  <div id="tab01" class="tab-contents">
+					    <h2>Add Vendors</h2>
+					    <p id="addVendorResult"></p>
+					    <div>
+					    	<form>
+					   			
+								  <label>
+								  	<p hidden class="errormessage">Vendor Name required</p>
+								    <p class="label-txt">Vendor Name *</p>
+								    <input id="vname" name="vname" type="text" class="input">
+								    <div class="line-box">
+								      <div class="line"></div>
+								    </div>
+								  </label>
+
+								  <label>
+								  	<p hidden class="errormessage">Vendor Mobile required</p>
+								    <p class="label-txt">Vendor Mobile *</p>
+								    <input id="vmobile" name="vmobile" type="text" class="input">
+								    <p class="errormessage"></p>
+								    <div class="line-box">
+								      <div class="line"></div>
+								    </div>
+								  </label>
+								  <label>
+								  	<p hidden class="errormessage">Vendor Address required</p>
+								    <p class="label-txt">Vendor Address *</p>
+								    <input id="vaddress" name="vaddress" type="text" class="input">
+								    <p class="errormessage"></p>
+								    <div class="line-box">
+								      <div class="line"></div>
+								    </div>
+								  </label>
+
+								  <button id="vdrBtn" type="button">submit</button>
+
+					   		</form>
+
+					    </div>
+					   	
+					  </div>
+					  <div id="tab02" class="tab-contents">
+					    <h2>List Vendors</h2>
+
+					    <div class="tcard">
+							<table id="resultsTbl">
+								<tr>
+									<th>Serial No</th>
+									<th>Vendor Name</th>
+									<th>Vendor Mobile</th>
+									<th>Vendor Address</th>
+									
+								</tr>
+							</table>
+						</div>
+					   	
+					  </div>
+				</div>
+
+			</div>
+
+				
+		</div>
+
+
+		
+		
+
+	</div>
+	
+	
+	
+</div>-->
+
+<div id="navDiv" class="container-fluid">
+
+	<div class="row">
+		<div class="col" style="text-align: left;margin-left: 20px;">
+			<a class="navbar-brand" href="#">
+  			
+  				<img src="{{url_for('static',filename='assets/brand_image.png')}}" class="rounded-oval" width="100" height="100">
+  			</a>
+		</div>
+
+		<div class="col" style="text-align: right;">
+			<div id="uDiv">
+				Hi {{username}}
+
+				<div id="pDiv" style="display:none">
+					<ul class="list-group">
+						<li class="list-group-item"><a href="/logout">Logout</a></li>
+					</ul>
+				</div>
+			</div>
+			
+			
+
+		</div>
+		
+	</div>
+	
+
+</div>
+
+
+
+<div style="margin-top:80px">
+
+
+	<div id="linkC" class="container"> 
+		<div id="nav" class="list-group list-group-flush">
+		  <a href="#manageVendors" class="list-group-item list-group-item-action">Manage Vendors</a>
+		  <a href="#manageProducts" class="list-group-item list-group-item-action">Manage Products</a>
+		  <a id="me" href="#manageEnquiries" class="list-group-item list-group-item-action">Manage Enquiries</a>
+		</div>
+		
+	</div>
+
+
+	<div id="mainC" class="container">
+			<div id="manageVendors" class="toggle">
+				<h1>Manage Vendors</h1>
+				<br/>
+				<br/>
+				<br/>
+
+
+				<div class="tabs">
+					  <div class="tab-button-outer">
+					    <ul id="tab-button">
+					      <li><a href="#tab01">Add Vendor</a></li>
+					      <li><a id="lv" href="#tab02">List Vendors</a></li>
+					    </ul>
+					  </div>
+					  <div class="tab-select-outer">
+					    <select id="tab-select">
+					      <option value="#tab01">Add Vendor</option>
+					      <option value="#tab02">List Vendors</option>
+					    </select>
+					  </div>
+
+
+					  <div id="tab01" class="tab-contents">
+						    <h2>Add Vendors</h2>
+						    <p id="addVendorResult"></p>
+						    <div>
+						    	<form>
+					   			
+								  <label>
+								  	<p hidden class="errormessage">Vendor Name required</p>
+								    <p class="label-txt">Vendor Name *</p>
+								    <input id="vname" name="vname" type="text" class="input">
+								    <div class="line-box">
+								      <div class="line"></div>
+								    </div>
+								  </label>
+
+								  <label>
+								  	<p hidden class="errormessage">Vendor Mobile required</p>
+								    <p class="label-txt">Vendor Mobile *</p>
+								    <input id="vmobile" name="vmobile" type="text" class="input">
+								    <p class="errormessage"></p>
+								    <div class="line-box">
+								      <div class="line"></div>
+								    </div>
+								  </label>
+								  <label>
+								  	<p hidden class="errormessage">Vendor Address required</p>
+								    <p class="label-txt">Vendor Address *</p>
+								    <input id="vaddress" name="vaddress" type="text" class="input">
+								    <p class="errormessage"></p>
+								    <div class="line-box">
+								      <div class="line"></div>
+								    </div>
+								  </label>
+
+								  <button id="vdrBtn" type="button">submit</button>
+
+					   		</form>
+
+						    </div>
+						   	
+						</div><!-- tab 1-->
+
+						<div id="tab02" class="tab-contents">
+						    <h2>List Vendors</h2>
+
+						    <div class="tcard">
+								<table id="resultsTbl">
+									<tr>
+										<th>Serial No</th>
+										<th>Vendor Name</th>
+										<th>Vendor Mobile</th>
+										<th>Vendor Address</th>
+										<!--<th>Update Product</th>
+										<th>Delete Product</th>
+										<th>Action<th>-->
+									</tr>
+								</table>
+							</div>
+						   	
+						  </div><!-- tab 2 -->
+
+
+
+				</div><!-- Tabs div -->
+
+
+			</div><!--manage vendors div -->
+
+
+			<div id="manageProducts" class="toggle" style="display:none">
+				
+				<h1>Manage Products</h1>
+				<br>
+				<br>
+				<br>
+
+				<div class="tabs">
+				  <div class="tab-button-outer">
+				    <ul id="tab-button">
+				      <li><a href="#tab03">Add Products</a></li>
+				      <li><a id="lp" href="#tab04">List Products</a></li>
+				    </ul>
+				  </div>
+				  <div class="tab-select-outer">
+				    <select id="tab-select">
+				      <option value="#tab03">Add Products</option>
+				      <option value="#tab04">List Products</option>
+				    </select>
+				  </div>
+
+
+				  <div id="tab03" class="tab-contents">
+					    <h2>Add Products</h2>
+					    <p id="addProductResult"></p>
+					    <div>
+					    	<form>
+						   			
+								  <label>
+								  	<p hidden class="errormessage">Product Name required</p>
+								    <p class="label-txt">Product Name *</p>
+								    <input id="pname" name="pname" type="text" class="input">
+								    <div class="line-box">
+								      <div class="line"></div>
+								    </div>
+								  </label>
+
+								  <label>
+								  	<p hidden class="errormessage">Product Size required</p>
+								    <p class="label-txt">Product Size *</p>
+								    <br/>
+								   	<select id="pSize" class="input">
+									  <option value="20">20</option>
+									  <option value="40">40</option>
+									 
+									</select>
+								   
+								    <div class="line-box">
+								      <div class="line"></div>
+								    </div>
+								  </label>
+								  <label>
+								  	<p hidden class="errormessage">Product Type required</p>
+								    <p class="label-txt">Product Type *</p>
+								    <br/>
+								    <select id="pType" class="input">
+									  <option value="GP">GP</option>
+									  <option value="FR">FR</option>
+									  <option value="OT">OT</option>
+									  <option value="Reefer">Reefer</option>
+									 
+									</select>
+								    
+								    <div class="line-box">
+								      <div class="line"></div>
+								    </div>
+								  </label>
+								  <label>
+								  	<p hidden class="errormessage">Product Weight required</p>
+								    <p class="label-txt">Product Weight *</p>
+								    <br/>
+								    <select id="pWeight" class="input">
+									  <option value="0-8">0-8</option>
+									  <option value="8.1-18">8.1-18</option>
+									  <option value="18.1-26">18.1-26</option>
+									  <option value="0-18">0-18</option>
+									  <option value="18-26">18-26</option>
+									 
+									</select>
+								    
+								    <div class="line-box">
+								      <div class="line"></div>
+								    </div>
+								  </label>
+
+								  <button id="productBtn" type="button">submit</button>
+
+					   		</form>
+
+					    </div>
+					   	
+					</div><!-- tab 3-->
+
+					<div id="tab04" class="tab-contents">
+						    <h2>List Products</h2>
+
+						    <div class="tcard">
+								<table id="productResultsTbl">
+									<tr>
+										<th>Serial No</th>
+										<th>Product Name</th>
+										<th>Product Size</th>
+										<th>Product Type</th>
+										<th>Product Weight</th>
+										<!--<th>Update Product</th>
+										<th>Delete Product</th>
+										<th>Action<th>-->
+									</tr>
+								</table>
+							</div>
+						   	
+						  </div><!-- tab 4 -->
+
+
+				</div><!-- tabs div -->
+
+
+
+			</div><!-- Manage Products div -->
+
+			<div id="manageEnquiries" class="toggle" style="display:none">
+				<h1>Manage Enquiries</h1>
+				<br>
+				<br>
+				<br>
+
+				<div class="tcard">
+					<table id="jobEnquiriesResultsTbl">
+						<tr>
+							<th>Serial No</th>
+							<th>Job Id</th>
+							<th>Job Enquiry Type</th>
+							<!--<th>Update Product</th>
+							<th>Delete Product</th>
+							<th>Action<th>-->
+						</tr>
+					</table>
+				</div>
+
+			</div>
+
+	</div><!-- mainC Div-->
+
+</div><!--outer div -->
+
+<script type="text/javascript">
+	
+	$(document).ready(function(){
+
+
+		var backend_server_ip = '{{backend_server_ip}}';
+		var flask_server_ip = '{{flask_server_ip}}';
+
+
+		$("#productBtn").on('click',function(){
+
+
+			var product = {
+				"productName" : $("#pname").val(),
+				"productSize" : $("#pSize option:selected").val(),
+				"productType" : $("#pType option:selected").val(),
+				"productWeight" : $("#pWeight option:selected").val()
+			}
+
+			console.log(product)
+
+			$.ajax({
+
+					type: "POST",
+					url: "http://" + backend_server_ip + ":3000/v1/products/product/add",
+					data: product,
+					success: function(data){
+						console.log(data)
+
+						if(data['status'] == 200){
+								$('#addProductResult').html(data['description'])
+
+						}else{
+							$('#addProductResult').html(data['description'])
+						}
+						
+
+					},
+
+					dataType: "json"
+				})
+
+
+		})
+
+
+
+		$("#vdrBtn").on('click',function(){
+
+			var vendor = {
+
+				"vendorName": $("#vname").val(),
+				"vendorMobile": $("#vmobile").val(),
+				"vendorAddress": $("#vaddress").val()
+			}
+
+			$.ajax({
+
+						type: "POST",
+						url: "http://" + backend_server_ip + ":3000/v1/vendors/vendor/add",
+						data: vendor,
+						success: function(data){
+							console.log(data); 
+							if(data['status'] == 200){
+
+								$('#addVendorResult').html(data['description'])
+
+							}else if(data['status'] == 401){
+
+								$('#addVendorResult').html(data['description'])
+
+								
+							}
+							
+
+						},
+
+						dataType: "json"
+					})
+
+
+				 
+
+		})
+
+
+
+
+		/*$('#pDiv').hide()
+		*/
+		
+		$("#uDiv").hover(function(){
+
+			$("#pDiv").show()
+
+		},function(){
+			$("#pDiv").hide()
+
+		})
+
+		$("#nav a").click(function(e){
+			    e.preventDefault();
+			    $(".toggle").hide();
+			    var toShow = $(this).attr('href');
+			    $(toShow).show();
+			});
+
+		/*alert('hellp');
+
+			*/
+
+	var $tabButtonItem = $('#tab-button li'),
+      $tabSelect = $('#tab-select'),
+      $tabContents = $('.tab-contents'),
+      activeClass = 'is-active';
+
+  $tabButtonItem.first().addClass(activeClass);
+  $tabContents.not(':first').hide();
+
+  $tabButtonItem.find('a').on('click', function(e) {
+    var target = $(this).attr('href');
+
+    $tabButtonItem.removeClass(activeClass);
+    $(this).parent().addClass(activeClass);
+    $tabSelect.val(target);
+    $tabContents.hide();
+    $(target).show();
+    e.preventDefault();
+  });
+
+  $tabSelect.on('change', function() {
+    var target = $(this).val(),
+        targetSelectNum = $(this).prop('selectedIndex');
+
+    $tabButtonItem.removeClass(activeClass);
+    $tabButtonItem.eq(targetSelectNum).addClass(activeClass);
+    $tabContents.hide();
+    $(target).show();
+  });	
+
+
+	 	$('#lv').on('click',function(){
+
+	 		$.ajax({
+
+
+					type: "GET",
+					url: "http://" + backend_server_ip + ":3000/v1/vendors",
+					success:function(data){
+						$("#resultsTbl").find("tr:not(:nth-child(1))").remove();
+						for(var i=0;i<data.length;i++){
+							tr = "<tr>" + "<td>" + "<a class="+ 'tlink'  + " href=" + data[i]._id + ">" + i + "</a" + "</td>" +
+							              "<td>" + data[i].vendorName + "</td>" +
+							              "<td>" + data[i].vendorMobile + "</td>" + 
+							              "<td>" + data[i].vendorAddress + "</td>" + 
+							              /*"<td>" + "<input type=checkbox name=up" + i + " value=" + i + "/>" + "</td>"
+							              "<td>" + "<input type=checkbox name=dl" + i + " value=" + i + "/>" + "</td>"
+							              "<td>" + "<button id=" +  + "</td>"*/
+
+							              + "</tr>"
+ 							$("#resultsTbl").append(tr)
+ 							$(".tlink").on('click',function(){
+								event.preventDefault();
+							})
+
+						}
+					}
+				})
+
+	 	})
+
+
+	 	$('#lp').on('click',function(){
+
+
+	 		$.ajax({
+	 				type: "GET",
+					url: "http://" + backend_server_ip + ":3000/v1/products",
+					success:function(data){
+						$("#productResultsTbl").find("tr:not(:nth-child(1))").remove();
+						for(var i=0;i<data.length;i++){
+							tr = "<tr>" + "<td>" + "<a class="+ 'tlink'  + " href=" + data[i]._id + ">" + i + "</a" + "</td>" +
+							              "<td>" + data[i].productName + "</td>" +
+							              "<td>" + data[i].productSize + "</td>" + 
+							              "<td>" + data[i].productType + "</td>" + 
+							              "<td>" + data[i].productWeight + "</td>"
+							              /*"<td>" + "<input type=checkbox name=up" + i + " value=" + i + "/>" + "</td>"
+							              "<td>" + "<input type=checkbox name=dl" + i + " value=" + i + "/>" + "</td>"
+							              "<td>" + "<button id=" +  + "</td>"*/
+
+							              + "</tr>"
+ 							$("#productResultsTbl").append(tr)
+ 							$(".tlink").on('click',function(){
+								event.preventDefault();
+							})
+
+						}
+					}
+	 			
+
+	 		})
+
+
+	 	})
+
+
+	 	$('#me').on('click',function(){
+
+	 		$.ajax({
+	 				type: "GET",
+					url: "http://" + backend_server_ip+ ":3000/v1/jobs",
+					success:function(data){
+						console.log(data)
+						$("#jobEnquiriesResultsTbl").find("tr:not(:nth-child(1))").remove();
+						for(var i=0;i<data.length;i++){
+							tr = "<tr>" + "<td>" + "<a class="+ 'tlink'  + " href=" + data[i]._id + ">" + i + "</a" + "</td>" +
+							              "<td>" + data[i].jobUniqueId + "</td>" +
+							              "<td>" + data[i].jobEnquiryType + "</td>"
+							              // "<td>" + "<input type=checkbox name=up" + i + " value=" + i + "/>" + "</td>"
+							              // "<td>" + "<input type=checkbox name=dl" + i + " value=" + i + "/>" + "</td>"
+							              // "<td>" + "<button id=" +  + "</td>"
+
+							              + "</tr>"
+ 							$("#jobEnquiriesResultsTbl").append(tr)
+ 							$(".tlink").on('click',function(){
+								event.preventDefault();
+							})
+
+						}
+					}
+	 			
+
+	 		})
+
+
+	 	})
+
+
+	})
+</script>
+	
+
+{% endblock %}
+
+{% include "footer.html" %}

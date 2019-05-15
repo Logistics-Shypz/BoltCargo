@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><!--href="{{url_for('static',filename='css/bootstrap.min.css')}}"-->
+	<title>Boltcargo Admin Panel</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+    <script type="text/javascript" src="{{url_for('static',filename='js/jquery-3.3.1.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
+
+</head>
+<style type="text/css">
+	
+
+
+body {
+  background: #0099cc;
+}
+form {
+  width: 60%;
+  margin: 60px auto;
+  background: #efefef;
+  padding: 60px 120px 80px 120px;
+  text-align: center;
+  -webkit-box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+  box-shadow: 2px 2px 3px rgba(0,0,0,0.1);
+}
+label {
+  display: block;
+  position: relative;
+  margin: 40px 0px;
+}
+.label-txt {
+  position: absolute;
+  top: -1.6em;
+  padding: 10px;
+  font-family: sans-serif;
+  font-size: .8em;
+  letter-spacing: 1px;
+  color: rgb(120,120,120);
+  transition: ease .3s;
+}
+.input {
+  width: 100%;
+  padding: 10px;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.line-box {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  background: #0099cc;
+}
+
+.line {
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  top: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0099cc;
+  transition: ease .6s;
+}
+
+.input:focus + .line-box .line {
+  width: 100%;
+}
+
+.label-active {
+  top: -3em;
+}
+
+button {
+  display: inline-block;
+  padding: 12px 24px;
+  background: #0099cc;
+  font-weight: bold;
+  color: #ffffff;
+  border: none;
+  outline: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: ease .3s;
+}
+
+button:hover {
+  background: #0099cc;
+  color: #ffffff;
+}
+
+</style>
+<body>
+
+
+	<!--
+		class container : fixed width container
+		class container-fluid: full width container
+
+	-->
+
+	<div style="display: inline-block;margin: 10px;">
+
+		<img src="{{url_for('static',filename='assets/brand_image.png')}}" alt="Boltcargo" height="142" width="142">
+
+	</div>
+
+	<form>
+		  <label>
+		  	<p id="e" hidden class="errormessage">Username required</p>
+		    <p class="label-txt">Username *</p>
+		    <input id="uname" name="uname" type="text" class="input">
+		    <div class="line-box">
+		      <div class="line"></div>
+		    </div>
+		  </label>
+		  <label>
+		  	<p hidden class="errormessage">Password required</p>
+		    <p class="label-txt">Password *</p>
+		    <input id="upass" name="upass" type="password" class="input">
+		    <div class="line-box">
+		      <div class="line"></div>
+		    </div>
+		  </label>
+
+		  <label>
+		  	<p hidden class="errormessage">Confirm Password required</p>
+		    <p class="label-txt">Confirm Password *</p>
+		    <input id="cupass" name="cupass" type="password" class="input">
+		    <p class="errormessage"></p>
+		    <div class="line-box">
+		      <div class="line"></div>
+		    </div>
+		  </label>
+		  <label>
+		  	<p hidden class="errormessage">Mobile number required</p>
+		    <p class="label-txt">Mobile *</p>
+		    <input id="umobile" name="umobile" type="text" class="input">
+		    <p class="errormessage"></p>
+		    <div class="line-box">
+		      <div class="line"></div>
+		    </div>
+		  </label>
+		  <button id="regBtn" type="button">submit</button>
+
+		  <div id="result">
+		  	
+		  </div>
+	</form>
+
+
+ <script type="text/javascript">
+
+	$(document).ready(function(){
+
+			var backend_server_ip = '{{backend_server_ip}}';
+			var flask_server_ip = '{{flask_server_ip}}';
+
+			console.log(backend_server_ip);
+			console.log(flask_server_ip);
+
+			var qParams = "";
+
+			var getQueryParams = function(locsearch){
+
+				if ((i = locsearch.indexOf('?')) >= 0) {
+			    const queryString = locsearch.substring(i+1);
+			    if (queryString) {
+			      return _mapUrlParams(queryString);
+			    } 
+			  }
+
+			  return {};
+			}
+
+			function _mapUrlParams(queryString) {
+			  return queryString    
+			    .split('&') 
+			    .map(function(keyValueString) { return keyValueString.split('=') })
+			    .reduce(function(urlParams, [key, value]) {
+			      if (Number.isInteger(parseInt(value)) && parseInt(value) == value) {
+			        urlParams[key] = parseInt(value);
+			      } else {
+			        urlParams[key] = decodeURI(value);
+			      }
+			      return urlParams;
+			    }, {});
+			}
+
+			if(location.search != ""){
+
+				qParams = getQueryParams(location.search);
+				
+			}
+
+			$('.input').focus(function(){
+				$(this).val('')
+			    $(this).parent().find(".label-txt").addClass('label-active');
+			  });
+
+			  $(".input").focusout(function(){
+			    if ($(this).val() == '') {
+			      $(this).parent().find(".label-txt").removeClass('label-active');
+			    };
+			  });
+
+
+			  $('#regBtn').on('click',function(){
+
+			  	var $inputs = $('.input')
+			  	var values = {}
+			  	$inputs.each(function(){
+
+			  		console.log(values[this.name] = $(this).val());
+			  	})
+
+			  	/*$.each(values,function(key,value,index){
+
+			  		if(values[key] == ""){
+			  			console.log(index)
+			  			//console.log(values[key]);
+			  			//console.log($("label:eq(index):first-child").attr('e'));
+			  		}
+			  	})*/
+
+			  	var d = {
+
+			  		userName: $('#uname').val(),
+			  		userPassword: $('#upass').val(),
+			  		userMobile:$ ('#umobile').val()
+			  	}
+
+
+				  $.ajax({
+
+						type: "POST",
+						url: "http://" + backend_server_ip + ":3000/v1/users/user/add",
+						data: d,
+						success: function(data){
+							console.log(data); 
+							if(data['status'] == 200){
+
+
+
+								if(typeof(Storage) !== "undefined"){
+									sessionStorage.id = data['object_id']
+								}
+								window.location.href = "http://" + flask_server_ip + ":5000/profile";
+							}else if(data['status'] == 401){
+								window.location.href = "http://" + flask_server_ip + ":5000/register?signup=" + data['description']
+								
+							}
+							
+
+						},
+
+						dataType: "json"
+					})
+
+
+				 })
+
+
+			  	if(qParams != ""){
+			  		$("#result").text(qParams['signup'])
+			  		$("#result").show()
+			  	}else{
+			  		$("#result").hide()
+			  		$("#result").text(" ")
+			  	}
+
+			  
+			
+
+
+
+
+	});
+
+
+</script>
+
+</body>
+</html>

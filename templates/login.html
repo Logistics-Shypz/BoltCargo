@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><!--href="{{url_for('static',filename='css/bootstrap.min.css')}}"-->
+	<title>Boltcargo Admin Panel</title>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/bootstrap.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='css/style.css')}}">
+    <script type="text/javascript" src="{{url_for('static',filename='js/jquery-3.3.1.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='js/bootstrap.min.js')}}"></script>
+
+</head>
+<body>
+
+
+	<!--
+		class container : fixed width container
+		class container-fluid: full width container
+
+	-->
+
+	<div style="display: inline-block;margin: 10px;">
+
+		<img src="{{url_for('static',filename='assets/brand_image.png')}}" alt="Boltcargo" height="142" width="142">
+
+	</div>
+
+	<div id="loginContainer" class="container">
+		
+			<div id="adminTextContainer">
+				<h2>Boltcargo Customer Login</h2>
+			</div>
+
+			<div id="adminFormContainer">
+				<!--<form action="#">
+					
+					Username:<br>	
+					<input type="text" name="bcusername" placeholder="Username"><br/>
+					<br>
+					
+					<input type="text" name="bcpassword" placeholder="Password"><br/>
+					<br>
+					
+
+					<input type="submit" name="Signin">
+
+				</form>-->
+				<form action="/dashboard" method="POST">
+				    <label for="bcusername">Username</label>
+				    <input type="text" id="bcuname" name="bcusername" placeholder="Enter User Name...">
+
+				    <label for="bcpassword">Password</label>
+				    <input type="password" id="bcpass" name="bcpassword" placeholder="Enter password....">
+
+				    <input type="submit" value="Submit">
+				</form>
+			</div>
+			
+
+	</div>
+
+
+ <script type="text/javascript">
+
+	$(document).ready(function(){
+
+
+			
+
+
+	});
+
+
+</script>
+
+</body>
+</html>
